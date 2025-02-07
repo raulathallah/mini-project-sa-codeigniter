@@ -31,9 +31,9 @@ class Produk extends BaseController
         return view('produk/v_produk_update', ['produk'=>$data]);
     } 
 
-    public function detail($nim):string
+    public function detail($id):string
     {
-        $data = $this->produkModel->getProdukById($nim);
+        $data = $this->produkModel->getProdukById($id);
         return view('produk/v_produk_detail', ['produk'=>$data]);
     }
 
@@ -50,15 +50,17 @@ class Produk extends BaseController
         return redirect()->to('/');
     }
 
-    public function update()
+    public function update($id)
     {
+        $data = $this->produkModel->getProdukById($id);
         $newData = new EntitiesProduk( 
             $this->request->getVar('id'),
             $this->request->getVar('nama'),
             $this->request->getVar('harga'),
-            $this->request->getVar('stok'),
-            $this->request->getVar('kategori')
+            $data->stok,
+            $this->request->getVar('kategori'),
         );
+
         $this->produkModel->updateProduk($newData);
         return redirect()->to('/');
     }

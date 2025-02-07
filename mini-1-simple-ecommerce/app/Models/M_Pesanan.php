@@ -43,6 +43,25 @@ use CodeIgniter\Model;
         }
       }
     }
+
+    public function updateProduk(Pesanan $new){
+      foreach($this->pesananArray as $key => $row){
+        if($row->id == $new->id){
+          $this->pesananArray[$key] = $new;
+          $this->onSave();
+        }
+      }
+    }
+
+    public function updateStatusById($id, $status){
+      foreach($this->pesananArray as $key => $row){
+        if($row->id == $id){
+          $this->pesananArray[$key]->updateStatus($status);
+          $this->onSave();
+        }
+      }
+    }
+
     function onSave(){
       $this->session->set("pesanan_list", $this->pesananArray);
     }

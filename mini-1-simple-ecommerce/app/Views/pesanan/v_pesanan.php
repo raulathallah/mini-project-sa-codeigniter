@@ -31,7 +31,7 @@
 
             <hr />
             <a href="" style="margin: 5px;">Detail</a>
-            <a href="" style="margin: 5px;">Update Status</a>
+            <a href="/order/update_status/<?= $row->id; ?>" style="margin: 5px;">Update Status</a>
             <a href="/order/delete/<?= $row->id; ?>" style="margin: 5px;">Delete</a>
           </div>
       <?php endforeach; ?>

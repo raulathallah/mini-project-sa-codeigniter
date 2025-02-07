@@ -6,14 +6,13 @@
 <body>
     <h3>Update Produk Form</h3>
 
-    <form action="/produk/save_update" method="post" style="display: grid;width: fit-content; gap: 5px">
+    <form action="/produk/save_update/<?= $produk->id; ?>" method="post" style="display: grid;width: fit-content; gap: 5px">
         <label>ID</label> 
         <input 
             type="number"
             id="id"
             name="id"
             value="<?= $produk->id ?>"
-            autofocus
         />
         <label>Nama</label>
         <input 
@@ -21,6 +20,7 @@
             id="nama"
             name="nama"
             value="<?= $produk->nama ?>"
+            autofocus
         />
         <label>Harga</label>
         <input 

@@ -29,30 +29,43 @@ class Pesanan extends BaseController
     {
         $produk = $this->produkModel->getAllProduk();
         return view('pesanan/v_pesanan_create', ['produk'=> $produk]);
+    }
+
+    public function on_update_status($id)
+    {
+        $pesanan = $this->pesananModel->getPesananById($id);
+        return view('pesanan/v_pesanan_update_status', ['pesanan'=> $pesanan]);
+    } 
+
+    public function update_status($id)
+    {
+        $status = $this->request->getVar('status');
+        $this->pesananModel->updateStatusById($id, $status);
+        return redirect()->to('/order');
     } 
 
     public function create()
     {
         $produk = $this->request->getVar('produk');
         
-        $array_produk = array();
-        $total = 0;
         $status = "SEDANG DIPROSES";
+        $produk_array = array();
 
         foreach($produk as $row){
-            $details = $this->produkModel->getProdukById($row);
-            $total = $total + $details->harga;
-            array_push($array_produk, $details);
+            $detail = $this->produkModel->getProdukById($row);
+            array_push($produk_array, $detail);
         }
 
         $data = $this->pesananModel->getAllPesanan();
-
+    
         $newData = new EntitiesPesanan( 
             count($data) + 1,
-            $array_produk,
-            $total,
+            $produk_array,
+            0,
             $status
         );
+        
+        $newData->calculateTotal();
         $this->pesananModel->addPesanan($newData);
         return redirect()->to('/order');
     } 

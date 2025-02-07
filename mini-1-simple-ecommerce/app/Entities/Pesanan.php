@@ -40,6 +40,13 @@
       }
     }
 
+    public function calculateTotal(){
+      foreach($this->produk as $row){
+        $this->total = $this->total + $row->harga;
+      }
+      return $this->total;
+    }
+
     public function updateStatus($status){
       $this->status = $status;
     }

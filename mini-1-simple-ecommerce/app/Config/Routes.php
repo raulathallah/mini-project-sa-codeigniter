@@ -24,7 +24,7 @@ $routes->get('produk/detail/(:num)', [Produk::class, 'detail']);
 
 //edit
 $routes->get('produk/edit/(:num)', [Produk::class, 'on_update']);
-$routes->post('produk/save_update', [Produk::class, 'update']);
+$routes->post('produk/save_update/(:num)', [Produk::class, 'update']);
 
 //stok routes
 $routes->post('produk/kurang/(:num)', [Produk::class, 'kurang_stok']);
@@ -40,3 +40,7 @@ $routes->post('order/save_add', [Pesanan::class, 'create']);
 
 //delete
 $routes->get('order/delete/(:num)', [Pesanan::class, 'delete']);
+
+//update status
+$routes->get('order/update_status/(:num)', [Pesanan::class, 'on_update_status']);
+$routes->post('order/save_update_status/(:num)', [Pesanan::class, 'update_status']);
