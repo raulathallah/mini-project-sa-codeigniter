@@ -4,7 +4,7 @@
     <title>Produk</title>
 </head>
 <body>
-    <h3>Detail Mahasiswa</h3>
+    <h3>Detail Produk</h3>
 
     <p>ID : <?= $produk->id?></p>
     <p>Nama : <?= $produk->nama?></p>

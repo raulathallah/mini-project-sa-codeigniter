@@ -24,9 +24,9 @@
             <p><?= $row->total;?></p>
             <p><?= $row->status;?></p>
             <ol type="1" style="margin: 0; padding-left: 20px;">
-            <?php foreach($row->produk as $produkList): ?>
-              <li><?= $produkList->nama; ?></li>
-            <?php endforeach; ?>
+              <?php foreach($row->produk as $produkList): ?>
+                <li><?= $produkList->nama; ?></li>
+              <?php endforeach; ?>
             </ol>
 
             <hr />

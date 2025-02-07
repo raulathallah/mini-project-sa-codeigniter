@@ -64,7 +64,6 @@ class Pesanan extends BaseController
             0,
             $status
         );
-        
         $newData->calculateTotal();
         $this->pesananModel->addPesanan($newData);
         return redirect()->to('/order');

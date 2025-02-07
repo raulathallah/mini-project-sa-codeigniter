@@ -38,7 +38,7 @@
       return $this->stok = $this->stok + 1;
     }
 
-    //validation method
+    //validation methods
   }
 ?>
 
