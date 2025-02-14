@@ -47,7 +47,7 @@ class Products extends ResourceController
         return redirect()->to('/products');
     }
 
-    public function postUpdate($id)
+    public function putUpdate($id)
     {
         $data = $this->productModel->getProductById($id);
         $newData = new Product($data->id, $this->request->getPost());
@@ -56,7 +56,7 @@ class Products extends ResourceController
         return redirect()->to('/products');
     }
 
-    public function postDelete($id)
+    public function deleteRemove($id)
     {
         $this->productModel->deleteProduct($id);
         return redirect()->to('/products');

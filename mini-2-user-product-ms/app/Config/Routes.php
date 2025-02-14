@@ -1,8 +1,9 @@
 <?php
 
+use App\Controllers\Admin\Dashboard;
+use App\Controllers\Admin\Users;
 use App\Controllers\Home;
 use App\Controllers\Pesanan;
-use App\Controllers\Produk;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -10,14 +11,40 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-$routes->get('/', [Home::class, 'index']);
+if(ENVIRONMENT == "development"){
+  $routes->get('/', [Home::class, 'development']);
+}else{
+  $routes->get('/', [Home::class, 'index']);
+}
+
 $routes->get('/about', [Home::class, 'about']);
 
+$routes->get('/health-check', function(){
+  return "Server is running";
+});
 
 // --- PRODUK
 $routes->resource('product');
 
+// --- USER
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes){
+  $routes->get('dashboard', [Dashboard::class, 'index'], ['filter'=> \App\Filters\AuthFilter::class]);  
+  //$routes->get('dashboard', [Dashboard::class, 'index']);  
+  $routes->group('users', function($routes){
+    $routes->get('', [Users::class, 'getIndex'], ['as' => 'user_dashboard']);
+    $routes->get('new', [Users::class, 'getNew']);
+    $routes->post('create', [Users::class, 'postCreate'], ['as' => 'user_create']);
+    $routes->get('detail/(:segment)', [Users::class, 'getDetail'], ['as' => 'user_detail']);
+    $routes->get('show/(:segment)', [Users::class, 'getShow'], ['as' => 'user_edit']);
+    $routes->post('update/(:segment)', [Users::class, 'postUpdate'], ['as' => 'user_update']);
+    $routes->delete('delete/(:segment)', [Users::class, 'deleteRemove'], ['as' => 'user_delete']);
+  });
+});
+
 /* 
+
+
+
 $routes->group('produk', function($routes){
   $routes->get('', [Produk::class, 'index']);
   $routes->get('add', [Produk::class, 'on_create']);

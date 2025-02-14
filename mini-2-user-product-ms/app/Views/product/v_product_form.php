@@ -8,6 +8,8 @@
         <form action="/products/create" method="post" style="display: grid;width: fit-content; gap: 5px">
     <?php else: ?>
         <form action="/products/update/<?= $product->id ?>" method="post" style="display: grid;width: fit-content; gap: 5px">
+        <?= csrf_field() ?>
+        <input type="hidden" name="_method" value="PUT">
     <?php endif; ?>
         <input 
             class="form-control my-1" 

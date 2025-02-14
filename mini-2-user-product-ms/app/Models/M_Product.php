@@ -1,8 +1,8 @@
 <?php 
   namespace App\Models;
 
-use App\Entities\Product;
-use CodeIgniter\Model;
+  use App\Entities\Product;
+  use CodeIgniter\Model;
 
   class M_Product extends Model
   {

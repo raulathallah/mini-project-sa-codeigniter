@@ -1,8 +1,8 @@
 <?php 
   namespace App\Models;
 
-use App\Entities\Pesanan;
-use CodeIgniter\Model;
+  use App\Entities\Pesanan;
+  use CodeIgniter\Model;
 
   class M_Pesanan extends Model
   {

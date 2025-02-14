@@ -2,8 +2,6 @@
 
 <?= $this->section('content') ?>
 <div>
-    <h3>Welcome to User & Product Management System.</h3>
-
-    <p><?= $environment ?> Mode</p>
+    <h3>Dashboard Admin</h3>
 </div>
 <?= $this->endSection(); ?>

@@ -35,7 +35,9 @@
           <div class="d-flex gap-1">
             <a href="/products/detail/<?= $row->id;?>" class="btn btn-secondary btn-sm" tabindex="-1" role="button" aria-disabled="true">Detail</a>
             <a href="/products/show/<?= $row->id;?>" class="btn btn-primary btn-sm" tabindex="-1" role="button" aria-disabled="true">Edit</a>
-            <form action="/products/delete/<?= $row->id;?>" method="post">
+            <form action="/products/remove/<?= $row->id;?>" method="post">
+              <?= csrf_field() ?>
+              <input type="hidden" name="_method" value="DELETE">
               <button class="btn btn-danger btn-sm" tabindex="-1">Delete</button>
             </form>
           </div>
