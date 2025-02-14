@@ -12,6 +12,7 @@
         <td>Email</td>
         <td>Role</td>
         <td>Action</td>
+        <td></td>
       </thead>
     <?php foreach($user as $row): ?>
       <tr>
@@ -28,6 +29,13 @@
               <input type="hidden" name="_method" value="DELETE">
               <button class="btn btn-danger btn-sm" tabindex="-1">Delete</button>
             </form>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex gap-1">
+            <a href="/user/profile/<?= $row->id ?>" class="btn btn-light btn-sm" tabindex="-1" role="button" aria-disabled="true">Profile</a>
+            <a href="/user/settings/<?= str_replace(' ', '', $row->nama); ?>" class="btn btn-light btn-sm" tabindex="-1" role="button" aria-disabled="true">Settings</a>
+            <a href="/user/role/<?= str_replace(' ', '', $row->role); ?>" class="btn btn-light btn-sm" tabindex="-1" role="button" aria-disabled="true">Role</a>
           </div>
         </td>
       </tr>

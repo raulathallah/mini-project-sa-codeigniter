@@ -2,8 +2,10 @@
 
 use App\Controllers\Admin\Dashboard;
 use App\Controllers\Admin\Users;
+use App\Controllers\Api;
 use App\Controllers\Home;
 use App\Controllers\Pesanan;
+use App\Controllers\Products;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -25,25 +27,45 @@ $routes->get('/health-check', function(){
 
 // --- PRODUK
 $routes->resource('product');
+$routes->get('detail', [Api::class, 'product_getDetail_api'], ['as' => 'product_detail_api']);
 
 // --- USER
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes){
-  $routes->get('dashboard', [Dashboard::class, 'index'], ['filter'=> \App\Filters\AuthFilter::class]);  
-  //$routes->get('dashboard', [Dashboard::class, 'index']);  
+  $routes->get('dashboard', [Dashboard::class, 'index'], ['filter'=>\App\Filters\AuthFilter::class]);  
+  //$routes->get('dashboard', [Dashboard::class, 'index']);   
   $routes->group('users', function($routes){
     $routes->get('', [Users::class, 'getIndex'], ['as' => 'user_dashboard']);
     $routes->get('new', [Users::class, 'getNew']);
     $routes->post('create', [Users::class, 'postCreate'], ['as' => 'user_create']);
-    $routes->get('detail/(:segment)', [Users::class, 'getDetail'], ['as' => 'user_detail']);
-    $routes->get('show/(:segment)', [Users::class, 'getShow'], ['as' => 'user_edit']);
-    $routes->post('update/(:segment)', [Users::class, 'postUpdate'], ['as' => 'user_update']);
-    $routes->delete('delete/(:segment)', [Users::class, 'deleteRemove'], ['as' => 'user_delete']);
+    $routes->get('detail/(:alphanum)', [Users::class, 'getDetail'], ['as' => 'user_detail']);
+    $routes->get('show/(:alphanum)', [Users::class, 'getShow'], ['as' => 'user_edit']);
+    $routes->post('update/(:alphanum)', [Users::class, 'postUpdate'], ['as' => 'user_update']);
+    $routes->delete('delete/(:alphanum)', [Users::class, 'deleteRemove'], ['as' => 'user_delete']);
+  });
+});
+
+$routes->group('user', function($routes){
+  //-- No.2
+  $routes->get('profile/(:segment)', [Users::class, 'profile']); //pakai (:segment) karena ID yang di generate berisikan number dan alphabet
+  $routes->get('settings/(:alpha)', [Users::class, 'settings']);
+  $routes->get('role/(:alphanum)', [Users::class, 'role']);
+});
+
+$routes->group('api', ['namespace' => 'App\Controllers\Admin'], function($routes){
+  $routes->get('', [Api::class, 'index']);
+  //-- USERS
+  $routes->group('users', function($routes){
+    $routes->get('', [Api::class, 'user_getIndex_api'], ['as' => 'user_all_api']);
+    $routes->get('detail', [Api::class, 'user_getDetail_api'], ['as' => 'user_detail_api']);
+  });
+  //-- PRODUCTS
+  $routes->group('products', function($routes){
+    $routes->get('', [Api::class, 'product_getIndex_api'], ['as' => 'product_all_api']);
+    $routes->get('detail', [Api::class, 'product_getDetail_api'], ['as' => 'product_detail_api']);
   });
 });
 
 /* 
-
-
 
 $routes->group('produk', function($routes){
   $routes->get('', [Produk::class, 'index']);

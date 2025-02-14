@@ -27,6 +27,14 @@
         $this->$atribut = $value;
       }  
     }
+
+    public function toArray(){
+      return [
+        'id'=> $this->id,
+        'nama'=>$this->nama,
+        'role'=>$this->role
+      ];
+    }
     
     //validation methods
   }

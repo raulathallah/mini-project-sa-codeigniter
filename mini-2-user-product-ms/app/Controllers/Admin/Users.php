@@ -37,7 +37,7 @@ class Users extends BaseController
     public function getDetail($id)
     {
         $data = $this->userModel->getUserById($id);
-        return view('user/v_user_detail', ['user'=>$data]);
+        return view('user/v_user_detail', ['user'=>$data, 'type'=>'detail']);
     }
 
     public function getShow($id)
@@ -66,6 +66,24 @@ class Users extends BaseController
         }else{
             echo "Invalid Method";
         }
+    }
+
+    public function profile($id)
+    {
+        $data = $this->userModel->getUserById($id);
+        return view('user/v_user_detail', ['user'=>$data, 'type'=>'profile']);
+    }
+
+    public function settings($slug)
+    {
+        $data = $this->userModel->getUserByName($slug);
+        return view('user/v_user_detail', ['user'=>$data, 'type'=>'settings']);
+    }
+
+    public function role($slug)
+    {
+        $data = $this->userModel->getUserByRole($slug);
+        return view('user/v_user_detail', ['user'=>$data, 'type'=>'role']);
     }
 
 }

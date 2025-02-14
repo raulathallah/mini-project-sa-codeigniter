@@ -40,7 +40,18 @@ use Faker\Core\Uuid;
       return $this->stok = $this->stok + 1;
     }
 
+    public function toArray(){
+      return [
+        'id'=> $this->id,
+        'nama'=>$this->nama,
+        'harga'=>$this->harga,
+        'stok'=>$this->stok,
+        'kategori'=>$this->kategori
+      ];
+    }
+
     //validation methods
+
   }
 ?>
 

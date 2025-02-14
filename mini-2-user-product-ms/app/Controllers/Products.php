@@ -73,4 +73,6 @@ class Products extends ResourceController
         $this->productModel->tambahStok($id);
         return redirect()->to('/products');
     }
+
+
 }

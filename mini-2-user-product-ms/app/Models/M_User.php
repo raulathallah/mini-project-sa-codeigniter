@@ -31,6 +31,27 @@
       return null;
     }
 
+    public function getUserByName($slug)
+    {
+      foreach($this->userArray as $row){
+        if(str_replace(' ', '', $row->nama) == $slug){
+          return $row;
+        }
+      }
+      return null;
+    }
+    
+    public function getUserByRole($slug)
+    {
+
+      foreach($this->userArray as $row){
+        if(str_replace(' ', '', $row->role) == $slug){
+          return $row;
+        }
+      }
+      return null;
+    }
+
     public function addUser(User $new){
       $this->userArray[] = $new;
       $this->onSave();

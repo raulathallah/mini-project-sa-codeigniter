@@ -1,16 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Product</title>
-</head>
-<body>
-    <h3>Detail Product</h3>
+<?= $this->extend('layout/template') ?>
 
-    <p>ID : <?= $product->id?></p>
-    <p>Nama : <?= $product->nama?></p>
-    <p>Harga : <?= $product->harga?></p>
-    <p>Stok : <?= $product->stok?></p>
-    <p>Kategori : <?= $product->kategori?></p>
+<?= $this->section('content') ?>
 
-</body>
-</html>
+<div>
+    <h5>Detail Product</h5>
+    <table class="table table-bordered" style="width: 50%;">
+        <tr>
+            <td>ID</td>
+            <td>
+                <?= $product->id?>
+            </td>
+        </tr>
+        <tr>
+            <td>Nama</td>
+            <td>
+                <?= $product->nama?>
+            </td>
+        </tr>
+        <tr>
+            <td>Harga</td>
+            <td>
+                <?= $product->harga?>
+            </td>
+        </tr>
+        <tr>
+            <td>Stok</td>
+            <td>
+                <?= $product->stok?>
+            </td>
+        </tr>
+        <tr>
+            <td>Kategori</td>
+            <td>
+                <?= $product->kategori?>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<?= $this->endSection(); ?>
