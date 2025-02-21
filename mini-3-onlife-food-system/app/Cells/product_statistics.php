@@ -2,8 +2,8 @@
     <!-- Your HTML here -->
     <h4>Product Statistics</h4>
     <ul>
-        <li>Total Products <span class="fw-bold"><?= $totalProducts; ?></span></li>
-        <li>Trending Items</li>
+        <li>Total Products : <span class="fw-bold"><?= $totalProducts; ?></span></li>
+        <li>Sales Trends</li>
         <ol>
             <?php foreach ($trend as $row): ?>
                 <li><?= $row['name']; ?> (<?= $row['sold']; ?> sold)</li>

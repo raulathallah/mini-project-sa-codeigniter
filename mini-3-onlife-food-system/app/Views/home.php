@@ -1,7 +1,8 @@
 <?= $this->extend('layouts/public_layout') ?>
 
 <?= $this->section('content') ?>
-<div>
-    <h3>Welcome</h3>
+<div class="d-flex gap-2 fw-bold fs-3">
+    <p>Welcome,</p>
+    <?= view_cell('UserProfileCell', ['user' => $user ?? '']) ?>
 </div>
 <?= $this->endSection(); ?>

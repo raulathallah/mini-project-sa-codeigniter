@@ -7,17 +7,20 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('home', ['environment'=> 'Production']);
-    } 
+        $userData = array();
+        if (cache()->get("user")) {
+            $userData = cache()->get("user");
+        }
+        return view('home', ['user' => $userData]);
+    }
 
-    public function development()
+    public function login()
     {
-        return view('home', ['environment'=> 'Development']);
-    } 
+        return view('login');
+    }
 
     public function about()
     {
         return view('about');
-    } 
-
+    }
 }

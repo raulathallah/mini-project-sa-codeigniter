@@ -19,7 +19,6 @@ class Product extends BaseController
     {
         $parser = \Config\Services::parser();
 
-
         //ALL PRODUCT
         $products = $this->product_model->getAllProduct();
 
@@ -32,14 +31,13 @@ class Product extends BaseController
             $row['price'] = number_format($row['price']);
             array_push($product_discounted, $row);
         }
-
         $pageData = [
             'products' => $product_discounted,
-            'product_statistics_cell' => view_cell('ProductStatisticsCell', ['products' => $products], HOUR, 'cache_product_statistics'),
+
         ];
 
         $data['content'] = $parser->setData($pageData)->render('parser/product/product_list', ['cache' => HOUR, 'cache_name' => 'cache_product_catalog']);
-
+        //
         return view('section_public/product_list', $data);
     }
 }

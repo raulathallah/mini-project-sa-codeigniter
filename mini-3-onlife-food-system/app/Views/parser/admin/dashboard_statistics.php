@@ -10,4 +10,6 @@
   </ul>
   {/statistics}
 
+  {!product_statistics_cell!}
+
 </div>

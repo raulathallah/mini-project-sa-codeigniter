@@ -18,17 +18,17 @@
 <body class="d-flex flex-column h-100">
   <!-- Header -->
   <header>
-    <?= $this->include('components/header') ?>
+    <?= $this->include('partials/header') ?>
   </header>
 
   <!-- Main Content -->
   <main class="flex-shrink-0 d-flex">
-    <div class="m-5">
+    <div class="m-2">
       <?= $this->renderSection('content') ?>
     </div>
   </main>
   <!-- Footer -->
-  <?= $this->include('components/footer') ?>
+  <?= $this->include('partials/footer') ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

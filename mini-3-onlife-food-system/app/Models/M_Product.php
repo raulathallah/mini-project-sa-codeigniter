@@ -20,7 +20,15 @@ class M_Product extends Model
         'stock' => 3,
         'status' => 'active',
         'sold' => 10,
-        'discount' => true
+        'discount' => true,
+        'categories' => [
+          [
+            'categoryName' => 'Sport'
+          ],
+          [
+            'categoryName' => 'Basketball'
+          ]
+        ]
       ],
       [
         'id' => 2,
@@ -30,7 +38,15 @@ class M_Product extends Model
         'stock' => 2,
         'status' => 'inactive',
         'sold' => 4,
-        'discount' => true
+        'discount' => true,
+        'categories' => [
+          [
+            'categoryName' => 'Sport'
+          ],
+          [
+            'categoryName' => 'Football'
+          ]
+        ]
       ],
       [
         'id' => 3,
@@ -40,7 +56,15 @@ class M_Product extends Model
         'stock' => 9,
         'status' => 'active',
         'sold' => 2,
-        'discount' => false
+        'discount' => false,
+        'categories' => [
+          [
+            'categoryName' => 'Sport'
+          ],
+          [
+            'categoryName' => 'Basketball'
+          ]
+        ]
       ],
       [
         'id' => 4,
@@ -50,7 +74,12 @@ class M_Product extends Model
         'stock' => 5,
         'status' => 'inactive',
         'sold' => 12,
-        'discount' => true
+        'discount' => true,
+        'categories' => [
+          [
+            'categoryName' => 'Sport'
+          ],
+        ]
       ],
       [
         'id' => 4,
@@ -60,7 +89,15 @@ class M_Product extends Model
         'stock' => 4,
         'status' => 'inactive',
         'sold' => 9,
-        'discount' => false
+        'discount' => false,
+        'categories' => [
+          [
+            'categoryName' => 'Sport'
+          ],
+          [
+            'categoryName' => 'Running'
+          ]
+        ]
       ],
       [
         'id' => 5,
@@ -70,7 +107,15 @@ class M_Product extends Model
         'stock' => 0,
         'status' => 'active',
         'sold' => 7,
-        'discount' => false
+        'discount' => false,
+        'categories' => [
+          [
+            'categoryName' => 'Sport'
+          ],
+          [
+            'categoryName' => 'Running'
+          ]
+        ]
       ],
       [
         'id' => 6,
@@ -80,7 +125,15 @@ class M_Product extends Model
         'stock' => 7,
         'status' => 'active',
         'sold' => 8,
-        'discount' => true
+        'discount' => true,
+        'categories' => [
+          [
+            'categoryName' => 'Sport'
+          ],
+          [
+            'categoryName' => 'American Football'
+          ]
+        ]
       ],
     ];
   }
