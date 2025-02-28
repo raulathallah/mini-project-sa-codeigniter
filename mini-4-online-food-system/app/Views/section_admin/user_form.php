@@ -61,7 +61,7 @@ User
                 type="text"
                 id="full_name"
                 class="form-control"
-                value="<?= $user->name  ?>"
+                value="<?= $user->full_name  ?>"
                 name="full_name">
             </div>
             <div class="mb-2">

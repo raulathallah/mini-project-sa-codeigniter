@@ -39,8 +39,8 @@ class UserModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'username'      => 'required|is_unique|min_length[3]',
-        'email'         => 'required|is_unique|valid_email',
+        //'username'      => 'required|is_unique[users.username]|min_length[3]',
+        //'email'         => 'required|is_unique[users.email]|valid_email',
         'password'      => 'required|min_length[8]',
         'full_name'     => 'required',
         'role'          => 'required',
@@ -103,8 +103,17 @@ class UserModel extends Model
             ->countAllResults();
     }
 
-    public function updateLastLogin()
+    public function updateLastLogin($user_id)
     {
-        //
+        return $this->update($user_id, ['last_login' => date('Y-m-d H:i:s')]);
+    }
+
+    public function setValidationRules($user_id = null)
+    {
+        // If updating, replace {id} with the user ID
+        if ($user_id) {
+            $this->validationRules['email'] = str_replace('{id}', $user_id, $this->validationRules['email']);
+            $this->validationRules['username'] = str_replace('{id}', $user_id, $this->validationRules['username']);
+        }
     }
 }

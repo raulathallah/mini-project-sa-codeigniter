@@ -90,26 +90,27 @@ class Product extends BaseController
         $data->is_sale = false;
         $saveProduct = $this->modelProduct->save($data);
 
+        if ($saveProduct == false) {
+            return redirect()->back()
+                ->with('errors', $this->modelProduct->errors())
+                ->withInput();
+            return redirect()->to('/admin/product/on_create');
+        }
 
         $pi = new ProductImage();
         $pi->product_id = $this->modelProduct->getInsertID();
         $pi->image_path = "EMPTY";
         $pi->is_primary = true;
-
         $saveProductImage = $this->modelProductImage->save($pi);
 
-
-        //save to db
-        if ($saveProduct && $saveProductImage) {
-
-            session()->setFlashdata('success', 'Product berhasil disimpan');
-
-            return redirect()->to('/admin/product');
+        if ($saveProductImage == false) {
+            return redirect()->back()
+                ->with('errors', $this->modelProductImage->errors())
+                ->withInput();
+            return redirect()->to('/admin/product/on_create');
         }
 
-        return redirect()->back()
-            ->with('errors', $this->modelProduct->errors())
-            ->withInput();
+        session()->setFlashdata('success', 'Product berhasil disimpan');
         return redirect()->to('/admin/product');
     }
 

@@ -14,10 +14,12 @@ class ProductImage extends Entity
         'image_path'        => null,
         'is_primary'        => null,
         'created_at'        => null,
+        'updated_at'        => null,
     ];
 
     protected $dates   = [
         'created_at',
+        'updated_at',
     ];
 
     protected $casts   = [];

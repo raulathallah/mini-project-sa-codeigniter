@@ -29,6 +29,9 @@ class CreateProductImageTable extends Migration
             'created_at' => [
                 'type'          => 'timestamp'
             ],
+            'updated_at' => [
+                'type'          => 'timestamp'
+            ],
         ]);
         $this->forge->addKey('product_image_id', true);
         $this->forge->addForeignKey('product_id', 'products', 'product_id', 'CASCADE', 'CASCADE');

@@ -7,6 +7,7 @@ use App\Entities\Product as EntitiesProduct;
 use App\Entities\User as EntitiesUser;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\I18n\Time;
 
 class User extends BaseController
 {
@@ -63,7 +64,7 @@ class User extends BaseController
     {
         $data = $this->modelUser->find($id);
         return view(
-            'section_admin/product_form',
+            'section_admin/user_form',
             [
                 'type' => 'Update',
                 'user' => $data,
@@ -77,34 +78,55 @@ class User extends BaseController
         $data->fill($this->request->getPost());
         $data->setPassword();
         $data->status = 'active';
-        //save to db
-        if ($this->modelUser->save($data)) {
+        $data->last_login = new Time();
 
-            session()->setFlashdata('success', 'User berhasil disimpan');
 
-            return redirect()->to('/admin/user');
+        $validationRules = $this->modelUser->getValidationRules();
+        $validationMessages = $this->modelUser->getValidationMessages();
+        $validationRules['email'] = 'required|is_unique[users.email,user_id]|valid_email';
+        $validationRules['username'] = 'required|is_unique[users.username,user_id]|min_length[3]';
+
+        // Validate input data
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()
+                ->with('errors', $this->validator->getErrors())
+                ->withInput();
         }
-
-        return redirect()->back()
-            ->with('errors', $this->modelUser->errors())
-            ->withInput();
+        $this->modelUser->save($data);
+        session()->setFlashdata('success', 'User berhasil disimpan');
         return redirect()->to('/admin/user');
     }
 
     public function update()
     {
-        $data = new EntitiesProduct;
+        $user_id = $this->request->getPost('user_id');
+        $password = $this->request->getPost('password');
+
+        $data = new EntitiesUser;
         $data->fill($this->request->getPost());
-        if ($this->modelUser->save($data)) {
+        $data->last_login = new Time();
 
-            session()->setFlashdata('success', 'User berhasil diubah');
+        $validationRules = $this->modelUser->getValidationRules();
+        $validationMessages = $this->modelUser->getValidationMessages();
 
-            return redirect()->to('/admin/user');
+        $validationRules['email'] = 'required|is_unique[users.email,user_id,' . $user_id . ']|valid_email';
+        $validationRules['username'] = 'required|is_unique[users.username,user_id,' . $user_id . ']|min_length[3]';
+
+        if (!empty($password)) {
+            $data->password = $data->setPassword();
+        } else {
+            $data->password = $data->password;
         }
 
-        return redirect()->back()
-            ->with('errors', $this->modelUser->errors())
-            ->withInput();
+        // Validate input data
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()
+                ->with('errors', $this->validator->getErrors())
+                ->withInput();
+        }
+
+        $this->modelUser->update($user_id, $data);
+        session()->setFlashdata('success', 'User berhasil diubah');
         return redirect()->to('/admin/user');
     }
 

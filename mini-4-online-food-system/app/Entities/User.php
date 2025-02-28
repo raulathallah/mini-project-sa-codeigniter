@@ -50,8 +50,7 @@ class User extends Entity
 
     public function getFormattedLastLogin()
     {
-        //blom format
-        return $this->attributes['last_login'];
+        return date('d M Y, H:i', strtotime($this->attributes['last_login']));
     }
 
     public function setPassword()
