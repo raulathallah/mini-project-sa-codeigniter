@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 
 class UserModel extends Model
@@ -41,7 +42,8 @@ class UserModel extends Model
         'username'      => 'required|is_unique|min_length[3]',
         'email'         => 'required|is_unique|valid_email',
         'password'      => 'required|min_length[8]',
-        //more validation
+        'full_name'     => 'required',
+        'role'          => 'required',
     ];
 
     protected $validationMessages   = [
@@ -58,7 +60,13 @@ class UserModel extends Model
         'password' => [
             'required' => 'Password is required',
             'min_length' => 'Password must be minimum 8 character '
-        ]
+        ],
+        'full_name' => [
+            'required' => 'Full name is required',
+        ],
+        'role' => [
+            'required' => 'Role is required',
+        ],
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
@@ -74,33 +82,28 @@ class UserModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function findActiveUsers(array $data)
+    public function findActiveUsers()
     {
-        if (!isset($data)) {
-            return $data;
-        }
-
-        $result = array();
-        foreach ($data as $row) {
-            if ($row->status == 'active') {
-                array_push($result, $row);
-            }
-        }
-
-        return $result;
+        return $this->where('status', 'active')->countAllResults();
     }
 
-    public function getTotalUsers($data)
+    public function getTotalUsers()
     {
-        return count($data);
+        return $this->countAllResults();
     }
 
-    public function getNewUsersThisMonth($data)
+    public function getNewUsersThisMonth()
     {
-        //
+        $currTime = Time::now();
+        $startOfMonth = Time::createFromTimestamp(strtotime($currTime->format('Y-m-01 00:00:00')));
+        $endOfMonth = Time::createFromTimestamp(strtotime($currTime->format('Y-m-t 23:59:59')));
+        return $this
+            ->where('created_at >=', $startOfMonth)
+            ->where('created_at <=', $endOfMonth)
+            ->countAllResults();
     }
 
-    public function updateLastLogin($data)
+    public function updateLastLogin()
     {
         //
     }

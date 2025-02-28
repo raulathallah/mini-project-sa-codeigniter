@@ -15,13 +15,11 @@ class Category extends Entity
         'status'        => null,
         'created_at'    => null,
         'updated_at'    => null,
-        'deleted_at'    => null
     ];
 
     protected $dates   = [
         'created_at',
         'updated_at',
-        'deleted_at'
     ];
 
     protected $casts   = [

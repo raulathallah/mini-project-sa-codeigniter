@@ -8,8 +8,7 @@
 <!-- Main Content -->
 <div class="d-flex">
     <?= $this->include('partials/sidebar') ?>
-
-    <div class="m-4">
+    <div class="mx-4">
         <?= $this->renderSection('admin_content') ?>
     </div>
 

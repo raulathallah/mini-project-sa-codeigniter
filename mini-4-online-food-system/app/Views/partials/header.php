@@ -15,9 +15,11 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/admin/dashboard">Admin Dashboard</a>
+          <a class="nav-link" aria-current="page" href="/admin/dashboard">Admin Area</a>
         </li>
       </ul>
+
+      <!--  
       <span class="d-flex gap-2" style="align-items: center;">
         <form action="/login" method="post">
           <button type="submit">Login</button>
@@ -27,6 +29,8 @@
         </form>
       </span>
       <?= view_cell('UserLoginCell'); ?>
+      -->
+
 
     </div>
   </div>

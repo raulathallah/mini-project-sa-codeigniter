@@ -17,13 +17,13 @@ class ProductStatisticsCell extends Cell
     protected $activeProduct;
 
 
-    public function mount(array $products)
+    public function mount()
     {
         $modelProduct = new ProductModel();
-        $this->totalProducts = count($products);
-        $this->outOfStock = $modelProduct->countOutOfStockProducts($products);
-        $this->onSale = $modelProduct->countOnSaleProducts($products);
-        $this->activeProduct = count($modelProduct->findActiveProducts($products));
+        $this->totalProducts = $modelProduct->countTotalProducts();
+        $this->outOfStock = $modelProduct->countOutOfStockProducts();
+        $this->onSale = $modelProduct->countOnSaleProducts();
+        $this->activeProduct = $modelProduct->findActiveProducts();
 
         //inventory
         // $inventoryResult = array();

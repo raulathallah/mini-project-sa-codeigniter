@@ -7,6 +7,18 @@ use CodeIgniter\Entity\Entity;
 class ProductImage extends Entity
 {
     protected $datamap = [];
-    protected $dates   = ['created_at', 'updated_at', 'deleted_at'];
+
+    protected $attributes = [
+        'product_image_id'  => null,
+        'product_id'        => null,
+        'image_path'        => null,
+        'is_primary'        => null,
+        'created_at'        => null,
+    ];
+
+    protected $dates   = [
+        'created_at',
+    ];
+
     protected $casts   = [];
 }

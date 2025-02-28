@@ -56,10 +56,8 @@ class User extends Entity
 
     public function setPassword()
     {
-        if (!isset($this->attributes['password'])) {
-            return $this->attributes['password'];
-        }
-        $hashPassword = password_hash($this->attributes['password'], PASSWORD_DEFAULT);
+        $hashPassword = password_hash($this->attributes['password'], PASSWORD_BCRYPT);
+        $this->attributes['password'] = $hashPassword;
         return $hashPassword;
     }
 }

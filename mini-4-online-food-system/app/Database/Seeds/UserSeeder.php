@@ -10,6 +10,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
+        $currTime = Time::now();
         $data = [
             [
                 'username'              => 'jodirodi',
@@ -18,9 +19,9 @@ class UserSeeder extends Seeder
                 'full_name'             => 'Jodi Rodi',
                 'role'                  => 'admin',
                 'status'                => 'active',
-                'last_login'            => new Time(),
-                'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'last_login'            => $currTime,
+                'created_at'            => $currTime,
+                'updated_at'            => $currTime,
                 //'deleted_at'            => new Time(),
             ],
             [
@@ -30,9 +31,9 @@ class UserSeeder extends Seeder
                 'full_name'             => 'Tatang Bala Bala',
                 'role'                  => 'member',
                 'status'                => 'active',
-                'last_login'            => new Time(),
-                'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'last_login'            => $currTime,
+                'created_at'            => $currTime,
+                'updated_at'            => $currTime,
                 //'deleted_at'            => new Time(),
             ],
         ];

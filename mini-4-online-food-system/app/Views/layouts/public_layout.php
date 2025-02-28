@@ -17,13 +17,13 @@
 
 <body class="d-flex flex-column h-100">
   <!-- Header -->
-  <header>
+  <header class="">
     <?= $this->include('partials/header') ?>
   </header>
 
   <!-- Main Content -->
-  <main class="flex-shrink-0 d-flex">
-    <div class="m-2">
+  <main class="d-flex">
+    <div class="m-4">
       <?= $this->renderSection('content') ?>
     </div>
   </main>

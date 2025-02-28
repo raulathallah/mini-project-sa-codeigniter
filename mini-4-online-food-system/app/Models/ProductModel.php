@@ -42,7 +42,7 @@ class ProductModel extends Model
         'price'         => 'required|greater_than[0]',
         'stock'         => 'required|is_natural',
         'name'          => 'required|min_length[3]',
-        //more validation
+        'category_id'   => 'required',
     ];
 
     protected $validationMessages   = [
@@ -57,6 +57,9 @@ class ProductModel extends Model
         'name' => [
             'required' => 'Name is required',
             'min_length' => 'Name must be minimum 3 character '
+        ],
+        'category_id' => [
+            'required' => 'Category is required',
         ]
     ];
     protected $skipValidation       = false;
@@ -73,89 +76,41 @@ class ProductModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function findActiveProducts(array $data)
+    public function product_images()
     {
-        if (!isset($data)) {
-            return $data;
-        }
-
-        $result = array();
-        foreach ($data as $row) {
-            if ($row->status == 'active') {
-                array_push($result, $row);
-            }
-        }
-
-        return $result;
+        return $this->hasMany('App\Models\ProductImageModel', 'product_id', 'product_id');
     }
 
-    public function getLowStockProducts(array $data)
+    public function findActiveProducts()
     {
-        if (!isset($data)) {
-            return $data;
-        }
-
-        $result = array();
-        foreach ($data as $row) {
-            if ($row->stock > 0 && $row->stock <= 3) {
-                array_push($result, $row);
-            }
-        }
-
-        return $result;
+        return $this->where('status', 'active')->countAllResults();
     }
 
-    public function countOutOfStockProducts(array $data)
+    public function getLowStockProducts()
     {
-        if (!isset($data)) {
-            return $data;
-        }
-
-        $result = array();
-        foreach ($data as $row) {
-            if ($row->stock == 0) {
-                array_push($result, $row);
-            }
-        }
-
-        return count($result);
+        return $this
+            ->where('stock >', 0)
+            ->where('stock <=', 3);
     }
 
-    public function countOnSaleProducts(array $data)
+    public function countOutOfStockProducts()
     {
-        if (!isset($data)) {
-            return $data;
-        }
+        return $this->where('stock', 0)->countAllResults();
+    }
 
-        $result = array();
-        foreach ($data as $row) {
-            if ($row->is_sale == 't') {
-                array_push($result, $row);
-            }
-        }
-
-        return count($result);
+    public function countOnSaleProducts()
+    {
+        return $this->where('is_sale', true)->countAllResults();
     }
 
 
-    public function getProductsByCategory(array $data, $category_id)
+    public function getProductsByCategory($category_id)
     {
-        if (!isset($category_id) || !isset($data)) {
-            return $data;
-        }
-
-        $result = array();
-        foreach ($data as $row) {
-            if ($row->category_id == $category_id) {
-                array_push($result, $row);
-            }
-        }
-
-        return $result;
+        return $this->where('category_id', $category_id);
     }
 
-    public function countTotalProducts(array $data)
+    public function countTotalProducts()
     {
-        return count($data);
+        return $this->countAllResults();
     }
 }

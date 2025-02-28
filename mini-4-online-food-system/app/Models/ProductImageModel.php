@@ -6,13 +6,18 @@ use CodeIgniter\Model;
 
 class ProductImageModel extends Model
 {
-    protected $table            = 'productimages';
-    protected $primaryKey       = 'id';
+    protected $table            = 'product_images';
+    protected $primaryKey       = 'product_image_id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    //protected $returnType       = 'array';
+    protected $returnType       = \App\Models\ProductImageModel::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'product_id',
+        'image_path',
+        'is_primary'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,11 +26,11 @@ class ProductImageModel extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    //protected $updatedField  = 'updated_at';
+    //protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];

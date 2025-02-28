@@ -12,28 +12,18 @@ class CategorySeeder extends Seeder
         //
         $data = [
             [
-                'name'                  => 'Running',
-                'description'           => 'A category for every running products',
+                'name'                  => 'Food',
+                'description'           => 'A category for every food in this restaurant',
                 'status'                => 'active',
                 'created_at'            => new Time(),
                 'updated_at'            => new Time(),
-                //'deleted_at'            => new Time(),
             ],
             [
-                'name'                  => 'Basketball',
-                'description'           => 'A category for every basketball products',
+                'name'                  => 'Beverage',
+                'description'           => 'A category for every drinks and desert in this restaurant',
                 'status'                => 'active',
                 'created_at'            => new Time(),
                 'updated_at'            => new Time(),
-                //'deleted_at'            => new Time(),
-            ],
-            [
-                'name'                  => 'Casual',
-                'description'           => 'A category for every casual products',
-                'status'                => 'active',
-                'created_at'            => new Time(),
-                'updated_at'            => new Time(),
-                //'deleted_at'            => new Time(),
             ],
         ];
         $this->db->table('categories')->insertBatch($data);

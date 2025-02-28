@@ -23,10 +23,6 @@ class User extends BaseController
         $parser = \Config\Services::parser();
         $userData = $this->modelUser->find($user_id);
 
-        //$y = $this->modelUser->getTotalUsers($x);
-        //$x = $this->modelUser->findActiveUsers($this->modelUser->findAll());
-        //dd($x);
-
         $data['content'] = $parser->setData($userData->toArray())->render('parser/user/user_profile');
         return view('section_public/user_profile', $data);
     }
