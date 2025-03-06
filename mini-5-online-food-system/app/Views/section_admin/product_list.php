@@ -39,6 +39,19 @@ Product List
 
         <div class="col-md-2">
           <div class="input-group ml-2">
+            <select name="categories" class="form-control" onchange="this.form.submit()">
+              <option value="">All Categories</option>
+              <?php foreach ($categories as $row): ?>
+                <option value="<?= $row ?>"
+                  <?= ($params->categories == $row) ? 'selected' : '' ?>><?= ucfirst($row);  ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="input-group ml-2">
             <select name="perPage" class="form-control" onchange="this.form.submit()">
               <option value="5" <?= ($params->perPage == 5) ? 'selected' : '' ?>>
                 5 per halaman

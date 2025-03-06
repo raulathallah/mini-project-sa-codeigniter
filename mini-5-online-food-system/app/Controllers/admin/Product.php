@@ -34,6 +34,7 @@ class Product extends BaseController
         $params = new DataParams([
             'search' => $this->request->getGet('search'),
             'price_range' => $this->request->getGet('price_range'),
+            'categories' => $this->request->getGet('categories'),
             'sort' => $this->request->getGet('sort'),
             'order' => $this->request->getGet('order'),
             'page' => $this->request->getGet('page_users'),
@@ -49,6 +50,7 @@ class Product extends BaseController
             'total' => $result['total'],
             'params' => $params,
             'price_range' => $this->modelProduct->getPriceRange(),
+            'categories' => $this->modelProduct->getAllCategories(),
             'baseUrl' => base_url('admin/product'),
         ];
 

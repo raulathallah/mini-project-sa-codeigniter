@@ -77,6 +77,9 @@ class ProductModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+
+
+
     public function product_images()
     {
         return $this->hasMany('App\Models\ProductImageModel', 'product_id', 'product_id');
@@ -145,6 +148,7 @@ class ProductModel extends Model
                 //->orLike('products.is_sale::text', '%' . $params->search . '%', 'both', null, true)
                 ->groupEnd();
         }
+
         if (!empty($params->price_range)) {
 
             $min = explode(',', $params->price_range)[0];
@@ -157,6 +161,10 @@ class ProductModel extends Model
                     ->where('products.price >', $min)
                     ->where('products.price <', $max);
             }
+        }
+
+        if (!empty($params->categories)) {
+            $this->where('categories.name', $params->categories);
         }
 
         // Apply sort
@@ -181,5 +189,15 @@ class ProductModel extends Model
             '60000,100000',
             '100000,Unlimited'
         ];
+    }
+
+    public function getAllCategories()
+    {
+        $categories = $this
+            ->select('categories.name')
+            ->distinct()
+            ->join('categories', 'products.category_id = categories.category_id')
+            ->findAll();
+        return array_column($categories, 'name');
     }
 }

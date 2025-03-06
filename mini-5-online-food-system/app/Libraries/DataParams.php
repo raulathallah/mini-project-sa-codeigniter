@@ -13,6 +13,7 @@ class DataParams
     public $status = '';
 
     public $price_range = '';
+    public $categories = '';
 
     public $sort = 'id';
     public $order = 'asc';
@@ -28,6 +29,7 @@ class DataParams
         $this->status = $params['status'] ?? '';
 
         $this->price_range = $params['price_range'] ?? '';
+        $this->categories = $params['categories'] ?? '';
 
         $this->sort = $params['sort'] ?? 'id';
         $this->order = $params['order'] ?? 'asc';
@@ -45,6 +47,7 @@ class DataParams
             'status' => $this->status,
 
             'price_range' => $this->price_range,
+            'categories' => $this->categories,
 
             'sort' => $this->sort,
             'order' => $this->order,
