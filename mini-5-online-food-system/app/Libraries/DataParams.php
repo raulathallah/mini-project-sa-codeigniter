@@ -12,6 +12,8 @@ class DataParams
     public $role = '';
     public $status = '';
 
+    public $price_range = '';
+
     public $sort = 'id';
     public $order = 'asc';
     public $page = 1;
@@ -24,6 +26,8 @@ class DataParams
 
         $this->role = $params['role'] ?? '';
         $this->status = $params['status'] ?? '';
+
+        $this->price_range = $params['price_range'] ?? '';
 
         $this->sort = $params['sort'] ?? 'id';
         $this->order = $params['order'] ?? 'asc';
@@ -39,6 +43,8 @@ class DataParams
 
             'role' => $this->role,
             'status' => $this->status,
+
+            'price_range' => $this->price_range,
 
             'sort' => $this->sort,
             'order' => $this->order,
@@ -69,7 +75,6 @@ class DataParams
     {
         return $this->sort === $column;
     }
-
 
     public function getSortDirection()
     {

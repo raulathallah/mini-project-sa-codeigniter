@@ -27,6 +27,18 @@ Product List
 
         <div class="col-md-2">
           <div class="input-group ml-2">
+            <select name="price_range" class="form-control" onchange="this.form.submit()">
+              <option value="">All Price</option>
+              <?php foreach ($price_range as $row): ?>
+                <option value="<?= $row ?>" <?= (urldecode($params->price_range) == $row) ? 'selected' : '' ?>><?= ucfirst(explode(',', $row)[0]);  ?> - <?= ucfirst(explode(',', $row)[1]);  ?> </option>
+              <?php endforeach; ?>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="input-group ml-2">
             <select name="perPage" class="form-control" onchange="this.form.submit()">
               <option value="5" <?= ($params->perPage == 5) ? 'selected' : '' ?>>
                 5 per halaman

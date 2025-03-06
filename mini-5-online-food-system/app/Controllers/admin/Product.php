@@ -30,32 +30,16 @@ class Product extends BaseController
 
     public function index()
     {
-        $productTable = $this->db->table('products');
-        $productTable
-            ->select('
-                products.product_id as id,
-                products.name as productName,
-                products.price as price,
-                categories.name as categoryName,
-                products.stock as stock,
-                products.status as status,
-                products.description as description,
-                products.is_new as is_new,
-                products.is_sale as is_sale,
-                product_images.image_path
-            ')
-            ->join('categories', 'products.category_id = categories.category_id')
-            ->join('product_images', 'product_images.product_id = products.product_id');
-        $products = $productTable->get()->getResult('array');
-
+        //print_r($this->request->getGet('price_range'));
         $params = new DataParams([
             'search' => $this->request->getGet('search'),
-
+            'price_range' => $this->request->getGet('price_range'),
             'sort' => $this->request->getGet('sort'),
             'order' => $this->request->getGet('order'),
             'page' => $this->request->getGet('page_users'),
             'perPage' => $this->request->getGet('perPage')
         ]);
+
         $result = $this->modelProduct->getFilteredProducts($params);
 
         $data = [
@@ -64,8 +48,7 @@ class Product extends BaseController
             'pager' => $result['pager'],
             'total' => $result['total'],
             'params' => $params,
-            //'role' => $this->modelUser->getAllRoles(),
-
+            'price_range' => $this->modelProduct->getPriceRange(),
             'baseUrl' => base_url('admin/product'),
         ];
 

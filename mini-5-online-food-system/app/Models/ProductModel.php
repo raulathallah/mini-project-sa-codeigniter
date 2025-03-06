@@ -117,6 +117,7 @@ class ProductModel extends Model
 
     public function getFilteredProducts(DataParams $params)
     {
+
         $joined = $this
             ->select('
             products.product_id as id,
@@ -139,11 +140,23 @@ class ProductModel extends Model
                 ->orLike('products.name', $params->search, 'both', null, true)
                 ->orLike('categories.name', $params->search, 'both', null, true)
                 ->orLike('products.status', $params->search, 'both', null, true)
-                ->orLike('products.price::text', '%' . $params->search . '%', 'both', null, true)
                 ->orLike('products.description', $params->search, 'both', null, true)
                 //->orLike('products.is_new::text', '%' . $params->search . '%', 'both', null, //true)
                 //->orLike('products.is_sale::text', '%' . $params->search . '%', 'both', null, true)
                 ->groupEnd();
+        }
+        if (!empty($params->price_range)) {
+
+            $min = explode(',', $params->price_range)[0];
+            $max = explode(',', $params->price_range)[1];
+            if (explode(',', $params->price_range)[1] == "Unlimited") {
+                $this
+                    ->where('products.price >', $min);
+            } else {
+                $this
+                    ->where('products.price >', $min)
+                    ->where('products.price <', $max);
+            }
         }
 
         // Apply sort
@@ -158,5 +171,15 @@ class ProductModel extends Model
             'total' => $this->countAllResults(false)
         ];
         return $result;
+    }
+
+    public function getPriceRange()
+    {
+        return [
+            '0,20000',
+            '20000,60000',
+            '60000,100000',
+            '100000,Unlimited'
+        ];
     }
 }
