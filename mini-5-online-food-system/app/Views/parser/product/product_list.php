@@ -8,8 +8,10 @@
       <span class="badge bg-secondary my-2">{categoryName}</span>
       <!-- STOCK -->
       <h6 class="mb-2">Stock : {stock}</h6>
+      <p class="mb-2 text-muted" style="text-align: justify;">{created_at_format}</p>
       <p class="mb-2" style="text-align: justify;">{description}</p>
     </div>
+
   </div>
   {/products}
 </div>

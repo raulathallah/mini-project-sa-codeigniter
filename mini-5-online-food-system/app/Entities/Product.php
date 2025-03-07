@@ -21,6 +21,8 @@ class Product extends Entity
         'created_at'    => null,
         'updated_at'    => null,
         'deleted_at'    => null,
+
+        'created_at_format' => null,
     ];
 
     protected $dates   = [

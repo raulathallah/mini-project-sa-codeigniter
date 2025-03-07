@@ -40,6 +40,10 @@ class Product extends BaseController
 
         $result = $this->modelProduct->getFilteredProducts($params);
 
+        foreach ($result['products'] as $row) {
+            $row->created_at_format = $row->created_at->humanize();
+        }
+
         $pageData = [
             'products' => $result['products']
         ];
