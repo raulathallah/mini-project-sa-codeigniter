@@ -68,11 +68,11 @@ class DataParams
         $queryString = http_build_query(array_filter($params));
         return $baseUrl . '?' . $queryString;
     }
+
     public function getResetUrl($baseUrl)
     {
         return $baseUrl;
     }
-
 
     public function isSortedBy($column)
     {

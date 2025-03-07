@@ -14,6 +14,49 @@
 
   <title><?= $this->renderSection('title') ?></title>
 
+  <style>
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    .custom-header {
+      background-color: #2c3e50;
+    }
+
+    .custom-secondary {
+      background-color: #e6e6fa;
+      /* Light blue (Bootstrap info accent) */
+      color: #2c3e50;
+      /* Dark teal text */
+    }
+
+    .custom-primary {
+      background-color: #2c3e50;
+      /* Teal (Bootstrap success accent) */
+      color: white;
+    }
+
+    .custom-primary:hover,
+    .custom-secondary:hover {
+      background-color: #bdaef7;
+      color: white;
+    }
+
+
+    /* Change the background color of the active page item */
+    .page-item.active .page-link {
+      background-color: #e6e6fa;
+      /* Set your custom active color */
+      border-color: #e6e6fa;
+      /* Optional: match the border color to the background */
+      color: #2c3e50;
+      /* Text color inside active page item */
+    }
+
+    .page-link {
+      color: #2c3e50;
+    }
+  </style>
 </head>
 
 <body class="d-flex flex-column h-100">

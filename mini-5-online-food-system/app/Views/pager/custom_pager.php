@@ -16,12 +16,12 @@
     <ul class="pagination">
         <?php if ($pager->hasPreviousPage()) : ?>
             <li class="page-item">
-                <a class="page-link" href="<?= $pager->getFirst() ?>" aria-label="<?= lang('Pager.first') ?>">
+                <a class="page-link custom-secondary" href="<?= $pager->getFirst() ?>" aria-label="<?= lang('Pager.first') ?>">
                     <span aria-hidden="true"><?= lang('Pager.first') ?></span>
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="<?= $pager->getPreviousPage() ?>" aria-label="<?= lang('Pager.previous') ?>">
+                <a class="page-link custom-secondary" href="<?= $pager->getPreviousPage() ?>" aria-label="<?= lang('Pager.previous') ?>">
                     <span aria-hidden="true"><?= lang('Pager.previous') ?></span>
                 </a>
             </li>
@@ -37,12 +37,12 @@
 
         <?php if ($pager->hasNextPage()) : ?>
             <li class="page-item">
-                <a class="page-link" href="<?= $pager->getNextPage() ?>" aria-label="<?= lang('Pager.next') ?>">
+                <a class="page-link custom-secondary" href="<?= $pager->getNextPage() ?>" aria-label="<?= lang('Pager.next') ?>">
                     <span aria-hidden="true"><?= lang('Pager.next') ?></span>
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="<?= $pager->getLast() ?>" aria-label="<?= lang('Pager.last') ?>">
+                <a class="page-link custom-secondary" href="<?= $pager->getLast() ?>" aria-label="<?= lang('Pager.last') ?>">
                     <span aria-hidden="true"><?= lang('Pager.last') ?></span>
                 </a>
             </li>

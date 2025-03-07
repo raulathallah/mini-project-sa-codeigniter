@@ -20,21 +20,21 @@ class ProductSeeder extends Seeder
                 'stock'                 => 15,
                 'is_new'                => true,
                 'is_sale'               => false,
-                'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'created_at'            => date('Y-m-d H:i:s', strtotime('2025-03-06 12:00:00')),
+                'updated_at'            => date('Y-m-d H:i:s', strtotime('2025-03-06 12:00:00')),
             ],
 
             [
                 'name'                  => 'Penne Arrabbiata',
                 'description'           => 'Spicy Italian penne pasta with tomato, garlic, and chili sauce.',
-                'price'                 => 65000,  // 65,000 IDR
+                'price'                 => 60000,  // 65,000 IDR
                 'category_id'           => 1,        // Food category
                 'status'                => 'active',
                 'stock'                 => 20,
                 'is_new'                => false,
                 'is_sale'               => true,
-                'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'created_at'            => date('Y-m-d H:i:s', strtotime('2025-02-28 15:30:00')),
+                'updated_at'            => date('Y-m-d H:i:s', strtotime('2025-02-28 15:30:00')),
             ],
 
             [
@@ -46,8 +46,8 @@ class ProductSeeder extends Seeder
                 'stock'                 => 30,
                 'is_new'                => true,
                 'is_sale'               => false,
-                'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'created_at'            => date('Y-m-d H:i:s', strtotime('2025-03-01 08:45:00')),
+                'updated_at'            => date('Y-m-d H:i:s', strtotime('2025-03-01 08:45:00')),
             ],
 
             [
@@ -59,10 +59,9 @@ class ProductSeeder extends Seeder
                 'stock'                 => 40,
                 'is_new'                => false,
                 'is_sale'               => true,
-                'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'created_at'            => date('Y-m-d H:i:s', strtotime('2025-03-03 10:20:00')),
+                'updated_at'            => date('Y-m-d H:i:s', strtotime('2025-03-03 10:20:00')),
             ],
-
 
         ];
         $this->db->table('products')->insertBatch($data);

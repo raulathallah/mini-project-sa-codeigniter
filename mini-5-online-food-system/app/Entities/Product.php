@@ -21,7 +21,6 @@ class Product extends Entity
         'created_at'    => null,
         'updated_at'    => null,
         'deleted_at'    => null,
-        //'categoryName'  => null
     ];
 
     protected $dates   = [
@@ -36,9 +35,15 @@ class Product extends Entity
         'stock'         => 'integer'
     ];
 
+
     public function getFormattedPrice()
     {
-        return 'Rp' . number_format($this->attributes['price']);
+        // Check if the price is numeric and greater than 0
+        if (is_numeric($this->price) && $this->price > 0) {
+            return 'Rp' . number_format($this->price, 0, ',', '.'); // Format the price as expected
+        } else {
+            return 'Invalid price or zero'; // Handle zero or invalid prices
+        }
     }
 
     public function isInStock()

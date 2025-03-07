@@ -1,13 +1,17 @@
-<div>
-  <h4 class="mb-4">{full_name}'s Profile</h4>
-  <ul>
-    <li>Name: <span class="fw-bold">{full_name}</span></li>
-    <li>Role: <span class="fw-bold">{role}</span></li>
-    <li>Status: <span class="fw-bold">{status}</span></li>
-    <li>Join Date: <span class="fw-bold">{created_at}</span></li>
-  </ul>
+<div class="card">
+  <div class="card-header">
+    {full_name}'s Profile
+  </div>
+  <div class="card-body">
+    <p>Name: <span class="fw-bold">{full_name}</span></p>
+    <p>Role: <span class="fw-bold">{role}</span></p>
+    <p>Status: <span class="fw-bold">{status}</span></p>
+    <p>Join Date: <span class="fw-bold">{created_at}</span></p>
+  </div>
+</div>
 
-  <!--
+
+<!--
   <h4 class="mb-4">Activity History</h4>
   {activity_history}
   <ul>
@@ -15,4 +19,3 @@
   </ul>
   {/activity_history}
    -->
-</div>

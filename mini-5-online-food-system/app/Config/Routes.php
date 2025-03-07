@@ -12,8 +12,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', [Home::class, 'login']);
-$routes->get('/home', [Home::class, 'index']);
+//$routes->get('/', [Home::class, 'login']);
+$routes->get('/', [Home::class, 'index']);
 
 $routes->get('product', [Product::class, 'index']);
 

@@ -77,9 +77,6 @@ class ProductModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-
-
-
     public function product_images()
     {
         return $this->hasMany('App\Models\ProductImageModel', 'product_id', 'product_id');
@@ -120,7 +117,6 @@ class ProductModel extends Model
 
     public function getFilteredProducts(DataParams $params)
     {
-
         $joined = $this
             ->select('
             products.product_id as id,
@@ -128,6 +124,8 @@ class ProductModel extends Model
             products.price as price,
             categories.name as categoryName,
             products.status as status,
+            products.stock as stock,
+            products.created_at as created_at,
             products.description as description,
             products.is_new as is_new,
             products.is_sale as is_sale,
@@ -151,32 +149,34 @@ class ProductModel extends Model
 
         if (!empty($params->price_range)) {
 
+            //0,20000
             $min = explode(',', $params->price_range)[0];
             $max = explode(',', $params->price_range)[1];
+
             if (explode(',', $params->price_range)[1] == "Unlimited") {
-                $this
-                    ->where('products.price >', $min);
+                $joined
+                    ->where('products.price >=', $min);
             } else {
-                $this
-                    ->where('products.price >', $min)
-                    ->where('products.price <', $max);
+                $joined
+                    ->where('products.price >=', $min)
+                    ->where('products.price <=', $max);
             }
         }
 
         if (!empty($params->categories)) {
-            $this->where('categories.name', $params->categories);
+            $joined->where('categories.name', $params->categories);
         }
 
         // Apply sort
-        $allowedSortColumns = ['price', 'products.name', 'date'];
-        $sort = in_array($params->sort, $allowedSortColumns) ? $params->sort : 'id';
+        $allowedSortColumns = ['price', 'products.name', 'created_at'];
+        $sort = in_array($params->sort, $allowedSortColumns) ? $params->sort : 'products.name';
         $order = ($params->order === 'desc') ? 'desc' : 'asc';
-        $this->orderBy($sort, $order);
+        $joined->orderBy($sort, $order);
 
         $result = [
-            'products' => $this->paginate($params->perPage, 'products', $params->page),
-            'pager' => $this->pager,
-            'total' => $this->countAllResults(false)
+            'products' => $joined->paginate($params->perPage, 'products', $params->page),
+            'pager' => $joined->pager,
+            'total' => $joined->countAllResults(false)
         ];
         return $result;
     }
@@ -184,9 +184,9 @@ class ProductModel extends Model
     public function getPriceRange()
     {
         return [
-            '0,20000',
-            '20000,60000',
-            '60000,100000',
+            '0,19999',
+            '20000,59999',
+            '60000,99999',
             '100000,Unlimited'
         ];
     }

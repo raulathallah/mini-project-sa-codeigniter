@@ -43,6 +43,7 @@ class Product extends BaseController
 
         $result = $this->modelProduct->getFilteredProducts($params);
 
+
         $data = [
             //'title' => 'Manajemen Users',
             'products' => $result['products'],
@@ -68,7 +69,8 @@ class Product extends BaseController
             [
                 'type' => 'Create',
                 'product' => $new,
-                'categories' => $categories
+                'categories' => $categories,
+                'action' => 'create'
             ]
         );
     }
@@ -82,7 +84,8 @@ class Product extends BaseController
             [
                 'type' => 'Update',
                 'product' => $data,
-                'categories' => $categories
+                'categories' => $categories,
+                'action' => 'update'
             ]
         );
     }

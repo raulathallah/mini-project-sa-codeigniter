@@ -80,6 +80,7 @@ User
               class="form-control"
               data-pristine-required
               data-pristine-required-message="Email harus diisi!"
+              data-pristine-email-message="Email harus valid!"
               value="<?= $user->email  ?>"
               name="email">
           </div>
@@ -95,7 +96,6 @@ User
           </div>
         </div>
         <?php if ($type == "Update"): ?>
-
           <div class="col">
             <div class="mb-2">
               <label for="status" class="form-label">Status</label>
@@ -108,7 +108,7 @@ User
           </div>
         <?php endif; ?>
       </div>
-      <button type=" submit" class="btn btn-primary mt-3">Save</button>
+      <button type=" submit" class="btn custom-primary mt-3">Save</button>
     </form>
   </div>
 </div>

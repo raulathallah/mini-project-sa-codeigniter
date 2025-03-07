@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="d-flex gap-2 fw-bold fs-3">
-    <p>Welcome,</p>
+    <p>Welcome!</p>
     <?= view_cell('UserProfileCell', ['user' => $user ?? '']) ?>
 </div>
 <?= $this->endSection(); ?>

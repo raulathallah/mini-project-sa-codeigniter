@@ -11,7 +11,7 @@ User List
   </div>
   <div class="card-body">
     <div class="mb-2">
-      <a href="/admin/user/on_create"><button class="btn btn-primary">Add User</button></a>
+      <a href="/admin/user/on_create"><button class="btn custom-primary">Add User</button></a>
     </div>
     <form action="<?= $baseUrl ?>" method="get" class="form-inline">
       <div class="row mb-4">
@@ -20,7 +20,7 @@ User List
             <input type="text" class="form-control" name="search"
               value="<?= $params->search ?>" placeholder="Search...">
             <div class="input-group-append">
-              <button class="btn btn-secondary" type="submit">Search</button>
+              <button class="btn custom-secondary" type="submit">Search</button>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@ User List
           </div>
         </div>
         <div class="col-md-1">
-          <a href="<?= $params->getResetUrl($baseUrl) ?>" class="btn btn-secondary ml-2">
+          <a href="<?= $params->getResetUrl($baseUrl) ?>" class="btn custom-secondary ml-2">
             Reset
           </a>
         </div>
@@ -77,7 +77,7 @@ User List
     </form>
   </div>
   <table class="table table-striped table-hover">
-    <thead class="table-dark">
+    <thead class="custom-header text-white">
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col"><a class="text-decoration-none text-white" href="<?= $params->getSortUrl('username', $baseUrl) ?>">
@@ -107,10 +107,10 @@ User List
           <td scope="row"><?= $row->status; ?></td>
           <td scope="row"><?= $row->getFormattedLastLogin(); ?></td>
           <td class="d-flex gap-2">
-            <a href="/user-profile/<?= $row->user_id; ?>" class="btn btn-outline-dark btn-sm">Detail</a>
-            <a href="/admin/user/on_update/<?= $row->user_id; ?>" class="btn btn-outline-primary btn-sm">Edit</a>
+            <a href="/user-profile/<?= $row->user_id; ?>" class="btn btn-dark btn-sm">Detail</a>
+            <a href="/admin/user/on_update/<?= $row->user_id; ?>" class="btn btn-primary btn-sm">Edit</a>
             <form action="/admin/user/delete/<?= $row->user_id; ?>" method="get">
-              <button class="btn btn-outline-danger btn-sm">Delete</button>
+              <button class="btn btn-danger btn-sm">Delete</button>
             </form>
           </td>
         </tr>

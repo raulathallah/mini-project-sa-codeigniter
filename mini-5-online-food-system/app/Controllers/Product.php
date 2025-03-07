@@ -3,11 +3,12 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Entities\Product as EntitiesProduct;
+use App\Libraries\DataParams;
 use App\Models\CategoryModel;
-use App\Models\M_Product;
 use App\Models\ProductModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\I18n\Time;
+use DateTime;
 
 class Product extends BaseController
 {
@@ -27,28 +28,33 @@ class Product extends BaseController
     public function index()
     {
         $parser = \Config\Services::parser();
-        $productTable = $this->db->table('products');
-        $productTable
-            ->select('
-                products.product_id as id,
-                products.name as productName,
-                products.price as price,
-                categories.name as categoryName,
-                products.stock as stock,
-                products.description as description,
-                products.is_sale as is_sale,
-                product_images.image_path
-            ')
-            ->join('categories', 'products.category_id = categories.category_id')
-            ->join('product_images', 'product_images.product_id = products.product_id');
-        $products = $productTable->get()->getResult('array');
+        $params = new DataParams([
+            'search' => $this->request->getGet('search'),
+            'price_range' => $this->request->getGet('price_range'),
+            'categories' => $this->request->getGet('categories'),
+            'sort' => $this->request->getGet('sort'),
+            'order' => $this->request->getGet('order'),
+            'page' => $this->request->getGet('page_users'),
+            'perPage' => $this->request->getGet('perPage')
+        ]);
+
+        $result = $this->modelProduct->getFilteredProducts($params);
 
         $pageData = [
-            'products' => $products,
+            'products' => $result['products']
         ];
 
-        $data['content'] = $parser->setData($pageData)->render('parser/product/product_list', ['cache' => HOUR, 'cache_name' => 'cache_product_catalog']);
-        //
+        $data = [
+            'pager' => $result['pager'],
+            'total' => $result['total'],
+            'params' => $params,
+            'price_range' => $this->modelProduct->getPriceRange(),
+            'categories' => $this->modelProduct->getAllCategories(),
+            'baseUrl' => base_url('product'),
+            'content' => $parser->setData($pageData)->render('parser/product/product_list')
+        ];
+
+        //, ['cache' => HOUR, 'cache_name' => 'cache_product_catalog']
         return view('section_public/product_list', $data);
     }
 }

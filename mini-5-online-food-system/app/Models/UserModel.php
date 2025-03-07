@@ -173,7 +173,6 @@ class UserModel extends Model
     {
         //$role = $this->select('role')->distinct()->findAll();
         //return array_column($role, 'role');
-
         return ['active', 'inactive'];
     }
 }

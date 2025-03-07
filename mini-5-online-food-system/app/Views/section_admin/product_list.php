@@ -11,7 +11,7 @@ Product List
   </div>
   <div class="card-body">
     <div class="mb-2">
-      <a href="/admin/product/on_create"><button class="btn btn-primary ">Add Product</button></a>
+      <a href="/admin/product/on_create"><button class="btn custom-primary ">Add Product</button></a>
     </div>
     <form action="<?= $baseUrl ?>" method="get" class="form-inline">
       <div class="row mb-4">
@@ -20,7 +20,7 @@ Product List
             <input type="text" class="form-control" name="search"
               value="<?= $params->search ?>" placeholder="Search...">
             <div class="input-group-append">
-              <button class="btn btn-secondary" type="submit">Search</button>
+              <button class="btn custom-secondary" type="submit">Search</button>
             </div>
           </div>
         </div>
@@ -30,9 +30,25 @@ Product List
             <select name="price_range" class="form-control" onchange="this.form.submit()">
               <option value="">All Price</option>
               <?php foreach ($price_range as $row): ?>
-                <option value="<?= $row ?>" <?= (urldecode($params->price_range) == $row) ? 'selected' : '' ?>><?= ucfirst(explode(',', $row)[0]);  ?> - <?= ucfirst(explode(',', $row)[1]);  ?> </option>
-              <?php endforeach; ?>
+                <option value="<?= $row ?>" <?= (urldecode($params->price_range) == $row) ? 'selected' : '' ?>>
 
+                  <?php
+                  // Split the row by comma
+                  $price_parts = explode(',', $row);
+
+                  // Check if both parts are numeric
+                  $price1 = is_numeric($price_parts[0]) ? number_format($price_parts[0]) : $price_parts[0];
+                  $price2 = isset($price_parts[1]) && is_numeric($price_parts[1]) ? number_format($price_parts[1]) : $price_parts[1];
+
+                  // If the second part is 'unlimited', handle it differently
+                  if (strtolower($price2) == 'unlimited') {
+                    $price2 = 'Unlimited';
+                  }
+
+                  echo 'Rp' . $price1 . ' - Rp' . $price2;
+                  ?>
+                </option>
+              <?php endforeach; ?>
             </select>
           </div>
         </div>
@@ -66,7 +82,7 @@ Product List
           </div>
         </div>
         <div class="col-md-1">
-          <a href="<?= $params->getResetUrl($baseUrl) ?>" class="btn btn-secondary ml-2">
+          <a href="<?= $params->getResetUrl($baseUrl) ?>" class="btn custom-secondary ml-2">
             Reset
           </a>
         </div>
@@ -79,7 +95,7 @@ Product List
     </form>
   </div>
   <table class="table table-striped table-hover">
-    <thead class="table-dark">
+    <thead class="custom-header text-white">
       <th scope="col">ID</th>
       <th scope="col"><a class="text-decoration-none text-white" href="<?= $params->getSortUrl('products.name', $baseUrl) ?>">
           Name <?= $params->isSortedBy('products.name') ? ($params->getSortDirection() == 'asc' ?
@@ -121,10 +137,10 @@ Product List
             <?php endif; ?>
           </td>
           <td class="d-flex gap-2">
-            <a href="/admin/product/detail/<?= $row->id; ?>" class="btn btn-outline-dark btn-sm">Detail</a>
-            <a href="/admin/product/on_update/<?= $row->id; ?>" class="btn btn-outline-primary btn-sm">Edit</a>
+            <a href="/admin/product/detail/<?= $row->id; ?>" class="btn btn-dark btn-sm">Detail</a>
+            <a href="/admin/product/on_update/<?= $row->id; ?>" class="btn btn-primary btn-sm">Edit</a>
             <form action="/admin/product/delete/<?= $row->id; ?>" method="get">
-              <button class="btn btn-outline-danger btn-sm">Delete</button>
+              <button class="btn btn-danger btn-sm">Delete</button>
             </form>
           </td>
         </tr>
@@ -132,6 +148,8 @@ Product List
       <?php endforeach; ?>
     </tbody>
   </table>
+  <?= $pager->links('products', 'custom_pager') ?>
+
 </div>
 
 <?= $this->endSection() ?>
