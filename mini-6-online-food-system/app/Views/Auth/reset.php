@@ -59,7 +59,7 @@ Reset Password
 
             <br>
 
-            <button type="submit" class="btn btn-primary btn-block"><?= lang('Auth.resetPassword') ?></button>
+            <button type="submit" class="btn custom-primary btn-block"><?= lang('Auth.resetPassword') ?></button>
           </form>
 
         </div>

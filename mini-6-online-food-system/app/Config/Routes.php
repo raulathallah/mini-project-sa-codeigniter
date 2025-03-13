@@ -25,7 +25,7 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
   $routes->post('login', 'Auth::attemptLogin');
 });
 
-$routes->get('user-profile/(:any)', [User::class, 'userProfile']);
+$routes->get('profile', [User::class, 'userProfile']);
 $routes->post('login', [Auth::class, 'login']);
 $routes->post('logout', [Auth::class, 'logout']);
 

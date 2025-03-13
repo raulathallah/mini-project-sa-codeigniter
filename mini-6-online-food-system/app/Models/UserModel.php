@@ -16,9 +16,10 @@ class UserModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'user_id',
         'username',
         'email',
-        'password',
+        //'password',
         'full_name',
         'role',
         'status',
@@ -36,15 +37,15 @@ class UserModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    //protected $deletedField  = 'deleted_at';
+    protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [
         //'username'      => 'required|is_unique[users.username]|min_length[3]',
         //'email'         => 'required|is_unique[users.email]|valid_email',
-        'password'      => 'required|min_length[8]',
-        'full_name'     => 'required',
-        'role'          => 'required',
+        //'password'      => 'required|min_length[8]',
+        //'full_name'     => 'required',
+        //'role'          => 'required',
     ];
 
     protected $validationMessages   = [
@@ -58,16 +59,16 @@ class UserModel extends Model
             'is_unique' => 'Email already exist',
             'valid_email' => 'Email is not valid',
         ],
-        'password' => [
-            'required' => 'Password is required',
-            'min_length' => 'Password must be minimum 8 character '
-        ],
-        'full_name' => [
-            'required' => 'Full name is required',
-        ],
-        'role' => [
-            'required' => 'Role is required',
-        ],
+        // 'password' => [
+        //     'required' => 'Password is required',
+        //     'min_length' => 'Password must be minimum 8 character '
+        // ],
+        // 'full_name' => [
+        //     'required' => 'Full name is required',
+        // ],
+        // 'role' => [
+        //     'required' => 'Role is required',
+        // ],
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

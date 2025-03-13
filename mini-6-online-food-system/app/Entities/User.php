@@ -12,14 +12,11 @@ class User extends Entity
         'user_id'       => null,
         'username'      => null,
         'email'         => null,
-        'password'      => null,
+        //'password'      => null,
         'full_name'     => null,
         'role'          => null,
         'status'        => null,
         'last_login'    => null,
-        'created_at'    => null,
-        'updated_at'    => null,
-        'deleted_at'    => null
     ];
 
     protected $dates   = [
@@ -53,10 +50,10 @@ class User extends Entity
         return date('d M Y, H:i', strtotime($this->attributes['last_login']));
     }
 
-    public function setPassword()
-    {
-        $hashPassword = password_hash($this->attributes['password'], PASSWORD_BCRYPT);
-        $this->attributes['password'] = $hashPassword;
-        return $hashPassword;
-    }
+    // public function setPassword()
+    // {
+    //     $hashPassword = password_hash($this->attributes['password'], PASSWORD_BCRYPT);
+    //     $this->attributes['password'] = $hashPassword;
+    //     return $hashPassword;
+    // }
 }

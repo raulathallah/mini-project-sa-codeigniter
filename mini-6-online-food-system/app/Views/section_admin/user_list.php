@@ -108,8 +108,8 @@ User List
           <td scope="row"><?= $row->getFormattedLastLogin(); ?></td>
           <td class="d-flex gap-2">
             <a href="/user-profile/<?= $row->user_id; ?>" class="btn btn-dark btn-sm">Detail</a>
-            <a href="/admin/user/on_update/<?= $row->user_id; ?>" class="btn btn-primary btn-sm">Edit</a>
-            <form action="/admin/user/delete/<?= $row->user_id; ?>" method="get">
+            <a href="/admin/user/on_update/<?= $row->account_id; ?>" class="btn btn-primary btn-sm">Edit</a>
+            <form action="/admin/user/delete/<?= $row->account_id; ?>" method="get">
               <button class="btn btn-danger btn-sm">Delete</button>
             </form>
           </td>

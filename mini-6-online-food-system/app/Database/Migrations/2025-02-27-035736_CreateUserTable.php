@@ -27,10 +27,11 @@ class CreateUserTable extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '255'
             ],
-            'password' => [
-                'type'          => 'VARCHAR',
-                'constraint'    => '255'
-            ],
+            // 'password' => [
+            //     'type'          => 'VARCHAR',
+            //     'constraint'    => '255',
+            //     'default'       => null,
+            // ],
             'full_name' => [
                 'type'          => 'VARCHAR',
                 'constraint'    => '255'

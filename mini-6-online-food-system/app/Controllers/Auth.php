@@ -2,8 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Entities\User as UserAccountModel;
+use App\Entities\User as EntitiesUser;
 use App\Models\M_User;
+use App\Models\UserModel as ModelsUserModel;
 use CodeIgniter\I18n\Time;
 use Myth\Auth\Controllers\AuthController;
 use Myth\Auth\Models\GroupModel;
@@ -23,7 +24,7 @@ class Auth extends AuthController
     parent::__construct();
     $this->userModel = new UserModel();
     $this->groupModel = new GroupModel();
-    $this->accountModel = new UserAccountModel();
+    $this->accountModel = new ModelsUserModel();
 
     $this->auth = service('authentication');
   }
@@ -37,6 +38,7 @@ class Auth extends AuthController
   public function attemptRegister()
   {
     // Jalankan registrasi bawaan
+
     $store = parent::attemptRegister();
     $email = $this->request->getPost('email');
 
@@ -44,6 +46,31 @@ class Auth extends AuthController
     //$roleGroup = 'student';
 
     $user = $this->userModel->where('email', $email)->first();
+
+    $new = [
+      'user_id'       => (int)$user->id,
+      'username'      => $user->username,
+      'email'         => $user->email,
+      'full_name'     => $user->username,
+      'role'          => $roleGroup,
+      'status'        => 'active',
+      'last_login'    => new Time(),
+    ];
+
+    $data = new EntitiesUser($new);
+
+    $validationRules = $this->accountModel->getValidationRules();
+    $validationMessages = $this->accountModel->getValidationMessages();
+    $validationRules['email'] = 'required|is_unique[accounts.email,account_id]|valid_email';
+    $validationRules['username'] = 'required|is_unique[accounts.username,account_id]|min_length[3]';
+
+    // Validate input data
+    if (!$this->validate($validationRules, $validationMessages)) {
+      return redirect()->back()
+        ->with('errors', $this->validator->getErrors())
+        ->withInput();
+    }
+    $this->accountModel->save($data);
 
     if ($user) {
       // Tambahkan ke group student

@@ -8,8 +8,8 @@
 
         <?php if (in_groups('administrator') || in_groups('product_manager')) : ?>
           <a class="nav-link text-white" aria-current="page" href="/admin/dashboard">Dashboard</a>
-
         <?php endif; ?>
+        <a class="nav-link text-white" aria-current="page" href="/profile">Profile</a>
 
       <?php endif; ?>
       <!--  

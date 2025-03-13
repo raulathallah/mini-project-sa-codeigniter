@@ -56,15 +56,16 @@ class User extends BaseController
     {
         $data = new EntitiesUser;
         $data->fill($this->request->getPost());
-        $data->setPassword();
+        //$data->setPassword();
         $data->status = 'active';
         $data->last_login = new Time();
+        $data->user_id = 1;
 
 
         $validationRules = $this->modelUser->getValidationRules();
         $validationMessages = $this->modelUser->getValidationMessages();
-        $validationRules['email'] = 'required|is_unique[users.email,user_id]|valid_email';
-        $validationRules['username'] = 'required|is_unique[users.username,user_id]|min_length[3]';
+        $validationRules['email'] = 'required|is_unique[accounts.email,account_id]|valid_email';
+        $validationRules['username'] = 'required|is_unique[accounts.username,account_id]|min_length[3]';
 
         // Validate input data
         if (!$this->validate($validationRules, $validationMessages)) {
@@ -93,9 +94,9 @@ class User extends BaseController
         $validationRules['username'] = 'required|is_unique[users.username,user_id,' . $user_id . ']|min_length[3]';
 
         if (!empty($password)) {
-            $data->password = $data->setPassword();
+            //$data->password = $data->setPassword();
         } else {
-            $data->password = $data->password;
+            //$data->password = $data->password;
         }
 
         // Validate input data

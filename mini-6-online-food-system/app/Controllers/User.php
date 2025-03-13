@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\M_User;
-use App\Models\UserModel;
+use App\Models\UserModel as UserAccountModel;
 use CodeIgniter\I18n\Time;
 
 class User extends BaseController
@@ -13,17 +13,19 @@ class User extends BaseController
 
     public function __construct()
     {
-        $this->modelUser = new UserModel();
+        $this->modelUser = new UserAccountModel();
     }
 
     public function index() {}
 
-    public function userProfile($user_id)
+    public function userProfile()
     {
         $parser = \Config\Services::parser();
-        $userData = $this->modelUser->find($user_id);
 
-        $data['content'] = $parser->setData($userData->toArray())->render('parser/user/user_profile');
+        $userData = $this->modelUser->where('user_id', user_id())->first()->toArray();
+
+
+        $data['content'] = $parser->setData($userData)->render('parser/user/user_profile');
         return view('section_public/user_profile', $data);
     }
 }
