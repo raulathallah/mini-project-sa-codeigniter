@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Entities\Product as EntitiesProduct;
 use App\Entities\User as EntitiesUser;
 use App\Libraries\DataParams;
 use App\Models\UserModel as UserAccountModel;
@@ -33,7 +32,7 @@ class User extends BaseController
 
     public function onCreate(): string
     {
-        $new = new EntitiesProduct();
+        $new = new EntitiesUser();
 
         return view(
             'section_admin/user_form',
@@ -117,9 +116,8 @@ class User extends BaseController
         $data = new EntitiesUser;
         $data->fill($this->request->getPost());
         //$data->setPassword();
-        $data->status = 'active';
-        $data->last_login = new Time();
-        $data->user_id = 1;
+        $data->status = 'inactive';
+        $data->last_login = null;
 
 
         $validationRules = $this->modelAccount->getValidationRules();
@@ -173,7 +171,13 @@ class User extends BaseController
 
     public function delete($id)
     {
-        $this->modelAccount->delete($id);
+        $data = $this->modelAccount->find($id);
+        $user = $this->modelUser->find($data->user_id);
+
+        if ($data && $user) {
+            $this->modelUser->delete($user->id);
+            $this->modelAccount->delete($id);
+        }
         return redirect()->to('/admin/user');
     }
 

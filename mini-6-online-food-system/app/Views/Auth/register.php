@@ -59,7 +59,7 @@ Register
                         </div>
 
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="role_group">Role</label>
                             <select class="form-select" id="role_group" name="role_group" aria-label="Default select example">
                                 <option selected hidden>Select role</option>
@@ -67,7 +67,7 @@ Register
                                 <option value="product_manager">product_manager</option>
                                 <option value="customer">customer</option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <br>
 

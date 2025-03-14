@@ -32,18 +32,50 @@ class Auth extends AuthController
   public function attemptLogin()
   {
     $result = parent::attemptLogin();
+
+    if (!user_id()) {
+      return redirect()->back()
+        ->with('error', "Please check you credentials")
+        ->withInput();
+    }
+
+    if (!in_groups('administrator')) {
+      $account = $this->accountModel->where('user_id', user_id())->first();
+      $account->status = 'active';
+      $account->last_login = new Time();
+
+      $this->accountModel->save($account);
+    }
     return $this->redirectBasedOnRole();
+  }
+
+  public function logout()
+  {
+
+    if (!in_groups('administrator')) {
+      $account = $this->accountModel->where('user_id', user_id())->first();
+      $account->status = 'inactive';
+      $this->accountModel->save($account);
+    }
+    parent::logout();
+    return redirect()->to('/');
   }
 
   public function attemptRegister()
   {
     // Jalankan registrasi bawaan
-
     $store = parent::attemptRegister();
+
+    if ($this->users->errors()) {
+      return redirect()->back()
+        ->with('error', $this->users->errors())
+        ->withInput();
+    }
+
     $email = $this->request->getPost('email');
 
-    $roleGroup = $this->request->getPost('role_group');
-    //$roleGroup = 'student';
+    //$roleGroup = $this->request->getPost('role_group');
+    $roleGroup = 'customer';
 
     $user = $this->userModel->where('email', $email)->first();
 
@@ -79,7 +111,7 @@ class Auth extends AuthController
         $this->groupModel->addUserToGroup($user->id, $studentGroup->id);
       }
     }
-    return redirect()->route('login')->with('message', lang('Auth.registerSuccess'));
+    return redirect()->route('login')->with('message', lang('Auth.activationSuccess'));
   }
 
   private function redirectBasedOnRole()

@@ -2,6 +2,7 @@
 
 use App\Controllers\Admin\Admin;
 use App\Controllers\Admin\Product as AdminProduct;
+use App\Controllers\Admin\Role;
 use App\Controllers\Admin\User as AdminUser;
 use App\Controllers\Auth;
 use App\Controllers\Home;
@@ -23,36 +24,54 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
 
   $routes->get('login', 'Auth::login', ['as' => 'login']);
   $routes->post('login', 'Auth::attemptLogin');
+
+  $routes->get('logout', 'Auth::logout');
 });
 
 $routes->get('profile', [User::class, 'userProfile']);
-$routes->post('login', [Auth::class, 'login']);
-$routes->post('logout', [Auth::class, 'logout']);
-
-$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
-  //$routes->get('dashboard', [Dashboard::class, 'index'], ['filter'=>\App\Filters\AuthFilter::class]);  
-
-  $routes->get('dashboard', [Admin::class, 'index']);
 
 
-  //product
-  $routes->get('product', [AdminProduct::class, 'index']);
-  $routes->get('product/on_create', [AdminProduct::class, 'onCreate']);
-  $routes->post('product/create', [AdminProduct::class, 'create']);
-  $routes->get('product/on_update/(:num)', [AdminProduct::class, 'onUpdate']);
-  $routes->post('product/update', [AdminProduct::class, 'update']);
-  $routes->get('product/delete/(:num)', [AdminProduct::class, 'delete']);
-  $routes->get('product/detail/(:num)', [AdminProduct::class, 'detail']);
-
-  //user
-  $routes->get('user', [Admin::class, 'getUsers']);
-  $routes->get('user/on_create', [AdminUser::class, 'onCreate']);
-  $routes->post('user/create', [AdminUser::class, 'create']);
-  $routes->get('user/on_update/(:num)', [AdminUser::class, 'onUpdate']);
-  $routes->post('user/update', [AdminUser::class, 'update']);
-  $routes->get('user/delete/(:num)', [AdminUser::class, 'delete']);
-  $routes->get('user/detail/(:num)', [AdminUser::class, 'detail']);
-
-  $routes->get('user/on_update_role/(:num)', [AdminUser::class, 'onUpdateRole']);
-  $routes->post('user/update_role', [AdminUser::class, 'updateRole']);
+$routes->group('admin/product', [
+  'filter' => 'role:product_manager,administrator',
+], function ($routes) {
+  $routes->get('', [AdminProduct::class, 'index']);
+  $routes->get('on_create', [AdminProduct::class, 'onCreate']);
+  $routes->post('create', [AdminProduct::class, 'create']);
+  $routes->get('on_update/(:num)', [AdminProduct::class, 'onUpdate']);
+  $routes->post('update', [AdminProduct::class, 'update']);
+  $routes->get('delete/(:num)', [AdminProduct::class, 'delete']);
+  $routes->get('detail/(:num)', [AdminProduct::class, 'detail']);
 });
+
+$routes->group('admin/user', [
+  'filter' => 'role:administrator',
+], function ($routes) {
+  $routes->get('', [Admin::class, 'getUsers']);
+  $routes->get('on_create', [AdminUser::class, 'onCreate']);
+  $routes->post('create', [AdminUser::class, 'create']);
+  $routes->get('on_update/(:num)', [AdminUser::class, 'onUpdate']);
+  $routes->post('update', [AdminUser::class, 'update']);
+  $routes->get('delete/(:num)', [AdminUser::class, 'delete']);
+  $routes->get('detail/(:num)', [AdminUser::class, 'detail']);
+  $routes->get('on_update_role/(:num)', [AdminUser::class, 'onUpdateRole']);
+  $routes->post('update_role', [AdminUser::class, 'updateRole']);
+});
+
+$routes->group('admin/role', [
+  'filter' => 'role:administrator',
+], function ($routes) {
+  $routes->get('', [Role::class, 'index']);
+  $routes->get('on_create', [Role::class, 'onCreate']);
+  $routes->post('create', [Role::class, 'create']);
+  $routes->get('on_update/(:num)', [Role::class, 'onUpdate']);
+  $routes->post('update', [Role::class, 'update']);
+  $routes->get('delete/(:num)', [Role::class, 'delete']);
+});
+
+
+$routes->group('admin', ['filter' => 'role:product_manager,administrator', 'namespace' => 'App\Controllers\Admin'], function ($routes) {
+  //$routes->get('dashboard', [Dashboard::class, 'index'], ['filter'=>\App\Filters\AuthFilter::class]);  
+  $routes->get('dashboard', [Admin::class, 'index']);
+});
+
+$routes->get('unauthorized', [Home::class, 'unauthorized']);

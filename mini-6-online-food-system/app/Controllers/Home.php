@@ -23,4 +23,9 @@ class Home extends BaseController
     {
         return view('about');
     }
+
+    public function unauthorized()
+    {
+        return view('unauthorized');
+    }
 }

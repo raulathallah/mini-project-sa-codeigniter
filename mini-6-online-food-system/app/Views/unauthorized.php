@@ -1,13 +1,10 @@
 <?= $this->extend('layouts/public_layout') ?>
 
 <?= $this->section('title') ?>
-Home
+401 Unauthorized
 <?= $this->endSection(); ?>
 
 
 <?= $this->section('content') ?>
-<div class="d-flex gap-2 fw-bold fs-3">
-    <p>Welcome!</p>
-    <?= view_cell('UserProfileCell', ['user' => $user ?? '']) ?>
-</div>
+<h1>401 Unauthorized </h1>
 <?= $this->endSection(); ?>
