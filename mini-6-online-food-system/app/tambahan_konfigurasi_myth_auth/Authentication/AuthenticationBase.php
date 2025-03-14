@@ -228,10 +228,6 @@ class AuthenticationBase
             'remember',                                  // Cookie Name
             $token,                                     // Value
             $this->config->rememberLength,              // # Seconds until it expires
-            // $appConfig->cookieDomain,
-            // $appConfig->cookiePath,
-            // $appConfig->cookiePrefix,
-            // $appConfig->cookieSecure,                   // Only send over HTTPS?
             $appConfig->domain,
             $appConfig->path,
             $appConfig->prefix,
@@ -270,10 +266,6 @@ class AuthenticationBase
             'remember',                              // Cookie Name
             $selector . ':' . $validator,                 // Value
             (string) $this->config->rememberLength, // # Seconds until it expires
-            // $appConfig->cookieDomain,
-            // $appConfig->cookiePath,
-            // $appConfig->cookiePrefix,
-            // $appConfig->cookieSecure,                   // Only send over HTTPS?
             $appConfig->domain,
             $appConfig->path,
             $appConfig->prefix,
