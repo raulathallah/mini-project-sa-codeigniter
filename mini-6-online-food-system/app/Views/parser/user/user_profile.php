@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    My Profile
+    {full_name}'s Profile
   </div>
   <div class="card-body">
     <p>Name: <span class="fw-bold">{full_name}</span></p>

@@ -63,9 +63,9 @@ Register
                             <label for="role_group">Role</label>
                             <select class="form-select" id="role_group" name="role_group" aria-label="Default select example">
                                 <option selected hidden>Select role</option>
-                                <option value="administrator">Administrator</option>
-                                <option value="product_manager">Product Manger</option>
-                                <option value="customer">Customer</option>
+                                <option value="administrator">administrator</option>
+                                <option value="product_manager">product_manager</option>
+                                <option value="customer">customer</option>
                             </select>
                         </div>
 

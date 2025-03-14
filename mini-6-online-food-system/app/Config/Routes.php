@@ -52,4 +52,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
   $routes->post('user/update', [AdminUser::class, 'update']);
   $routes->get('user/delete/(:num)', [AdminUser::class, 'delete']);
   $routes->get('user/detail/(:num)', [AdminUser::class, 'detail']);
+
+  $routes->get('user/on_update_role/(:num)', [AdminUser::class, 'onUpdateRole']);
+  $routes->post('user/update_role', [AdminUser::class, 'updateRole']);
 });

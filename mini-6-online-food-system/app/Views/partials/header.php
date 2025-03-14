@@ -9,8 +9,9 @@
         <?php if (in_groups('administrator') || in_groups('product_manager')) : ?>
           <a class="nav-link text-white" aria-current="page" href="/admin/dashboard">Dashboard</a>
         <?php endif; ?>
-        <a class="nav-link text-white" aria-current="page" href="/profile">Profile</a>
-
+        <?php if (!in_groups('administrator')) : ?>
+          <a class="nav-link text-white" aria-current="page" href="/profile">Profile</a>
+        <?php endif; ?>
       <?php endif; ?>
       <!--  
       <span class="d-flex gap-2" style="align-items: center;">

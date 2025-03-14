@@ -9,11 +9,11 @@ use CodeIgniter\I18n\Time;
 
 class User extends BaseController
 {
-    protected $modelUser;
+    protected $modelAccount;
 
     public function __construct()
     {
-        $this->modelUser = new UserAccountModel();
+        $this->modelAccount = new UserAccountModel();
     }
 
     public function index() {}
@@ -22,7 +22,7 @@ class User extends BaseController
     {
         $parser = \Config\Services::parser();
 
-        $userData = $this->modelUser->where('user_id', user_id())->first()->toArray();
+        $userData = $this->modelAccount->where('user_id', user_id())->first()->toArray();
 
 
         $data['content'] = $parser->setData($userData)->render('parser/user/user_profile');

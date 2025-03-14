@@ -103,12 +103,21 @@ User List
           <td scope="row"><?= $row->full_name; ?></td>
           <td scope="row"><?= $row->username; ?></td>
           <td scope="row"><?= $row->email; ?></td>
-          <td scope="row"><?= $row->role; ?></td>
+          <td>
+            <?php
+            $groupModel = new \Myth\Auth\Models\GroupModel();
+            $groups = $groupModel->getGroupsForUser($row->user_id);
+            foreach ($groups as $group) {
+              echo '<span class="badge bg-info me-1">' . $group['name'] . '</span>';
+            }
+            ?>
+          </td>
           <td scope="row"><?= $row->status; ?></td>
           <td scope="row"><?= $row->getFormattedLastLogin(); ?></td>
           <td class="d-flex gap-2">
-            <a href="/user-profile/<?= $row->user_id; ?>" class="btn btn-dark btn-sm">Detail</a>
+            <a href="/admin/user/detail/<?= $row->user_id; ?>" class="btn btn-dark btn-sm">Detail</a>
             <a href="/admin/user/on_update/<?= $row->account_id; ?>" class="btn btn-primary btn-sm">Edit</a>
+            <a href="/admin/user/on_update_role/<?= $row->user_id; ?>" class="btn btn-info btn-sm">Change Role</a>
             <form action="/admin/user/delete/<?= $row->account_id; ?>" method="get">
               <button class="btn btn-danger btn-sm">Delete</button>
             </form>

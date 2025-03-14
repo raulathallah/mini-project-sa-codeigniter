@@ -10,6 +10,10 @@
       <li class="list-group-item"><a class="btn custom-secondary btn-sm w-100" href="/admin/product">Products</a></li>
     <?php endif; ?>
 
+    <?php if (!in_groups('administrator')): ?>
+      <li class="list-group-item"><a class="btn custom-secondary btn-sm w-100" href="/profile">Profile</a></li>
+    <?php endif; ?>
+
     <?php if (in_groups('product_manager')): ?>
       <li class="list-group-item"><a class="btn custom-secondary btn-sm w-100" href="/admin/product">Products</a></li>
     <?php endif; ?>
